@@ -27,6 +27,17 @@ namespace task
             }
             return false;
         }
+        public override bool Deposit(double amount)
+        {
+            if (amount > 0)
+            {
+                Balance += amount;
+                return true;
+            }
+            return false;
+        }
+
+
         public override string ToString()
         {
             return $"Checking Account {Name} has balance {Balance}";
