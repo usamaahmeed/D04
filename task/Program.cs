@@ -48,8 +48,9 @@
             AccountUtil.Display(trustAccounts);
             AccountUtil.Deposit(trustAccounts, 1000);
             AccountUtil.Deposit(trustAccounts, 6000);
-            AccountUtil.Withdraw(trustAccounts, 2000);
-            AccountUtil.Withdraw(trustAccounts, 3000);
+            AccountUtil.Withdraw(trustAccounts, 500);
+            AccountUtil.Withdraw(trustAccounts, 500);
+            AccountUtil.Withdraw(trustAccounts, 500);
             AccountUtil.Withdraw(trustAccounts, 500);
 
             //sum two accounts with + operator

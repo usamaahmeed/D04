@@ -18,6 +18,7 @@ namespace task
     {
         private const int MaxWithdrawals = 3; 
         private int withdrawalsThisYear = 0;
+        private DateTime lastWithdrawalDate = DateTime.Now; 
 
         public TrustAccount(string name = "osama ahmed", double balance = 0.0, double interestRate = 0.0)
             : base(name, balance, interestRate)
@@ -40,16 +41,20 @@ namespace task
             }
             return false;
         }
-
         public override bool Withdraw(double amount)
         {
+            if (DateTime.Now.Year != lastWithdrawalDate.Year && DateTime.Now.Month == lastWithdrawalDate.Month)
+            {
+                withdrawalsThisYear = 0;
+            }
+
             if (withdrawalsThisYear >= MaxWithdrawals)
             {
                 Console.WriteLine("Withdrawal limit reached for the year.");
                 return false;
             }
 
-            double maxAllowedWithdrawal = Balance * 0.2; 
+            double maxAllowedWithdrawal = Balance * 0.2;
             if (amount > maxAllowedWithdrawal)
             {
                 Console.WriteLine($"Cannot withdraw more than 20% of the balance. Maximum allowed: {maxAllowedWithdrawal}");
@@ -60,12 +65,15 @@ namespace task
             {
                 Balance -= amount;
                 withdrawalsThisYear++;
+                lastWithdrawalDate = DateTime.Now; 
                 return true;
             }
 
             Console.WriteLine("Insufficient funds.");
             return false;
         }
+
+
         public override string ToString()
         {
             return $"Trust Account {Name} has balance {Balance} and interest rate {InterestRate}";
